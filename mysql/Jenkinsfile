@@ -40,7 +40,7 @@ pipeline {
                    sh """
                    aws eks update-kubeconfig --region ${region} --name ${project}
 
-                   cd helm
+                   cd mysql/helm
 
 
                    helm upgrade --install ${component} -n ${project} \
