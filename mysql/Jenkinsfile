@@ -17,9 +17,9 @@ pipeline {
         
     }
 
-    /* stages {
+    stages {
         
-        stage('Docker build') {
+        /*stage('Docker build') {
             
             steps {
                 withAWS(region: "${region}", credentials: 'creds') {
