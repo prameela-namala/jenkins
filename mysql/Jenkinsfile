@@ -14,7 +14,7 @@ pipeline {
         project = 'expense'
         environment = 'dev'
         component = 'mysql'
-        #appVersion = "${BUILD_NUMBER}"
+        
     }
 
     stages {
