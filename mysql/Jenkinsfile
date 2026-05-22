@@ -23,17 +23,15 @@ pipeline {
             
             steps {
                 withAWS(region: "${region}", credentials: 'creds') {
-                    sh """
-                    aws sts get-caller-identity
-                    aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.us-east-1.amazonaws.com
+                   sh """
+                   cd mysql
 
-                    docker build -f mysql/Dockerfile -t ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${BUILD_NUMBER} .
+                   aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.us-east-1.amazonaws.com
 
-                    docker images
+                   docker build -t ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${BUILD_NUMBER} .
 
-                    docker push ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${BUILD_NUMBER}
-                    """
-                }
+                   docker push ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${BUILD_NUMBER}
+                   """              }
             }
         }
         stage('Deploy'){
