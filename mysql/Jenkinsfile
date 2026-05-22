@@ -34,18 +34,23 @@ pipeline {
                    """              }
             }
         }
-        stage('Deploy'){
+       stage('Deploy'){
             steps{
                 withAWS(region: 'us-east-1', credentials: 'creds') {
-                    sh """
-                        aws eks update-kubeconfig --region ${region} --name ${project}
-                        cd mysql/helm
-                        sed -i 's/IMAGE_VERSION/${appVersion}/g' values-${environment}.yaml
-                        helm upgrade --install ${component} -n ${project} -f values-${environment}.yaml .
-                    """
-                }
-            }
+                  sh """
+                    aws eks update-kubeconfig --region ${region} --name expense
+
+                    kubectl create namespace ${project} --dry-run=client -o yaml | kubectl apply -f -
+
+                    cd mysql/helm
+
+                    sed -i "s/IMAGE_VERSION/${BUILD_NUMBER}/g" values-${environment}.yaml
+
+                    helm upgrade --install ${component} -n ${project} -f values-${environment}.yaml .
+                  """
         }
+    }
+}
     }
 
     post {
