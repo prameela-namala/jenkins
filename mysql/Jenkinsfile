@@ -17,7 +17,7 @@ pipeline {
 
     stages {
         
-        /*stage('Docker build') {
+        stage('Docker build') {
             
             steps {
                 withAWS(region: "${region}", credentials: 'creds') {
@@ -31,7 +31,7 @@ pipeline {
                    docker push ${account_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${environment}/${component}:${BUILD_NUMBER}
                    """              }
             }
-        } */
+        } 
        stage('Deploy'){
             steps{
                 withAWS(region: 'us-east-1', credentials: 'creds') {
