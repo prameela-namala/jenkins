@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    tools {
+        nodejs 'NodeJS-20'
+    }
     
     options{
         timeout(time: 30, unit: 'MINUTES')
@@ -15,6 +19,7 @@ pipeline {
         environment = 'dev'
         component = 'backend'
     }
+
 
     stages {
         stage('Read the version') {
