@@ -1,5 +1,5 @@
-# configMap:
-#   db_host: expense-dev.czn6yzxlcsiv.us-east-1.rds.amazonaws.com
+configMap:
+   db_host: mysql
 deployment:
   imageURL: 752192503692.dkr.ecr.us-east-1.amazonaws.com/expense/dev/backend
   imageVersion: IMAGE_VERSION
