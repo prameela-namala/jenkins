@@ -1,7 +1,5 @@
-configMap:
-  db_host: expense-dev.czn6yzxlcsiv.us-east-1.rds.amazonaws.com
 deployment:
   imageURL: 752192503692.dkr.ecr.us-east-1.amazonaws.com/expense/dev/mysql
-  imageVersion: 19
+  imageVersion: 3
 hpa:
   cpuUtilization: 20
